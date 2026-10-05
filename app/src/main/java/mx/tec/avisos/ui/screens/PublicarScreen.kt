@@ -55,7 +55,8 @@ fun PublicarScreen(
     onQuitarImagen: () -> Unit,
     onPublicar: () -> Unit,
     onCancelar: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onCamara: () -> Unit,
 ) {
     val espaciado = AvisosTema.espaciado
 
@@ -125,6 +126,11 @@ fun PublicarScreen(
                 if (uiState.imagen != null) {
                     TextButton(onClick = onQuitarImagen, enabled = !uiState.enviando) { Text("Quitar") }
                 }
+                OutlinedButton(onClick = onCamara, enabled = !uiState.enviando) {
+                    Icon(painterResource(R.drawable.ic_camara), contentDescription = null, modifier = Modifier.size(18.dp))
+                    Spacer(Modifier.width(espaciado.sm))
+                    Text("Cámara")
+                }
             }
 
             // El error del servidor: un 403, un 422 que la validación no atrapó,
@@ -164,7 +170,8 @@ private fun PublicarPreview() {
             autor = "profe.prueba",
             onTituloChange = {}, onCuerpoChange = {},
             onGaleria = {}, onQuitarImagen = {},
-            onPublicar = {}, onCancelar = {}
+            onPublicar = {}, onCancelar = {},
+            onCamara = {},
         )
     }
 }
