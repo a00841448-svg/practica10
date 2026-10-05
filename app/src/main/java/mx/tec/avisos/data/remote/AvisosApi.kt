@@ -7,6 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import okhttp3.MultipartBody
+import retrofit2.http.Multipart
+import retrofit2.http.Part
 
 interface AvisosApi {
 
@@ -36,4 +39,9 @@ interface AvisosApi {
 
     @DELETE("avisos/{id}")
     suspend fun borrarAviso(@Path("id") id: Int): Response<Unit>
+
+    /** Multipart: el archivo viaja como una "parte" del cuerpo, como en un formulario web con `<input type="file">`. */
+    @Multipart
+    @POST("imagenes")
+    suspend fun subirImagen(@Part archivo: MultipartBody.Part): ImagenDto
 }
